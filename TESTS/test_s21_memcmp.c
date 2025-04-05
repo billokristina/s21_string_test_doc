@@ -6,8 +6,8 @@ START_TEST(memcmp_1)
     const char *str2 = "abc";
     s21_size_t n = 3;
 
-    int result = my_memcmp(str1, str2, n); // Ваша реализация
-    int expected = memcmp(str1, str2, n);  // Оригинальная реализация
+    int result = my_memcmp(str1, str2, n);
+    int expected = memcmp(str1, str2, n);
 
     ck_assert_int_eq(result, expected);
 }
@@ -19,8 +19,8 @@ START_TEST(memcmp_2)
     const char *str2 = "abd";
     s21_size_t n = 3;
 
-    int result = my_memcmp(str1, str2, n); // Ваша реализация
-    int expected = memcmp(str1, str2, n);  // Оригинальная реализация
+    int result = my_memcmp(str1, str2, n);
+    int expected = memcmp(str1, str2, n);
 
     ck_assert_int_eq(result, expected);
 }
@@ -32,8 +32,8 @@ START_TEST(memcmp_3)
     const char *str2 = "abc";
     s21_size_t n = 3;
 
-    int result = my_memcmp(str1, str2, n); // Ваша реализация
-    int expected = memcmp(str1, str2, n);  // Оригинальная реализация
+    int result = my_memcmp(str1, str2, n);
+    int expected = memcmp(str1, str2, n);
 
     ck_assert_int_eq(result, expected);
 }
@@ -45,8 +45,8 @@ START_TEST(memcmp_4)
     const char *str2 = "def";
     s21_size_t n = 0;
 
-    int result = my_memcmp(str1, str2, n); // Ваша реализация
-    int expected = memcmp(str1, str2, n);  // Оригинальная реализация
+    int result = my_memcmp(str1, str2, n);
+    int expected = memcmp(str1, str2, n);
 
     ck_assert_int_eq(result, expected);
 }
@@ -58,8 +58,8 @@ START_TEST(memcmp_5)
     const char *str2 = "ab";
     s21_size_t n = 2;
 
-    int result = my_memcmp(str1, str2, n); // Ваша реализация
-    int expected = memcmp(str1, str2, n);  // Оригинальная реализация
+    int result = my_memcmp(str1, str2, n);
+    int expected = memcmp(str1, str2, n);
 
     ck_assert_int_eq(result, expected);
 }
@@ -71,8 +71,8 @@ START_TEST(memcmp_6)
     const char *str2 = "ab\0d";
     s21_size_t n = 4;
 
-    int result = my_memcmp(str1, str2, n); // Ваша реализация
-    int expected = memcmp(str1, str2, n);  // Оригинальная реализация
+    int result = my_memcmp(str1, str2, n);
+    int expected = memcmp(str1, str2, n);
 
     ck_assert_int_eq(result, expected);
 }
@@ -84,8 +84,8 @@ START_TEST(memcmp_7)
     const char *str2 = "\x01\x02\x04";
     s21_size_t n = 3;
 
-    int result = my_memcmp(str1, str2, n); // Ваша реализация
-    int expected = memcmp(str1, str2, n);  // Оригинальная реализация
+    int result = my_memcmp(str1, str2, n);
+    int expected = memcmp(str1, str2, n);
 
     ck_assert_int_eq(result, expected);
 }
@@ -97,8 +97,8 @@ START_TEST(memcmp_8)
     const char *str2 = "café";
     s21_size_t n = 5;
 
-    int result = my_memcmp(str1, str2, n); // Ваша реализация
-    int expected = memcmp(str1, str2, n);  // Оригинальная реализация
+    int result = my_memcmp(str1, str2, n);
+    int expected = memcmp(str1, str2, n);
 
     ck_assert_int_eq(result, expected);
 }
@@ -110,8 +110,8 @@ START_TEST(memcmp_9)
     const char *str2 = "abc";
     s21_size_t n = 3;
 
-    int result = my_memcmp(str1, str2, n); // Ваша реализация
-    int expected = memcmp(str1, str2, n);  // Оригинальная реализация
+    int result = my_memcmp(str1, str2, n);
+    int expected = memcmp(str1, str2, n);
 
     ck_assert_int_eq(result, expected);
 }
@@ -123,8 +123,8 @@ START_TEST(memcmp_10)
     const char *str2 = "abc";
     s21_size_t n = 10;
 
-    int result = my_memcmp(str1, str2, n); // Ваша реализация
-    int expected = memcmp(str1, str2, n);  // Оригинальная реализация
+    int result = my_memcmp(str1, str2, n);
+    int expected = memcmp(str1, str2, n);
 
     ck_assert_int_eq(result, expected);
 }
@@ -132,25 +132,20 @@ END_TEST
 
 START_TEST(memcmp_11)
 {
-    const s21_size_t size = 1024 * 1024; // 1 МБ
+    const s21_size_t size = 1024 * 1024;
     char *str1 = (char *)malloc(size);
     char *str2 = (char *)malloc(size);
 
-    // Заполнение строк одинаковыми данными
     memset(str1, 'a', size);
     memset(str2, 'a', size);
 
-    // Изменение одного символа в str2
     str2[size - 1] = 'b';
 
-    // Сравнение строк
-    int result = my_memcmp(str1, str2, size); // Ваша реализация
-    int expected = memcmp(str1, str2, size);  // Оригинальная реализация
+    int result = my_memcmp(str1, str2, size);
+    int expected = memcmp(str1, str2, size);
 
-    // Проверка результата
     ck_assert_int_eq(result, expected);
 
-    // Освобождение памяти
     free(str1);
     free(str2);
 }
@@ -162,8 +157,8 @@ START_TEST(memcmp_12)
     const char *str2 = "aaaab";
     s21_size_t n = 5;
 
-    int result = my_memcmp(str1, str2, n); // Ваша реализация
-    int expected = memcmp(str1, str2, n);  // Оригинальная реализация
+    int result = my_memcmp(str1, str2, n);
+    int expected = memcmp(str1, str2, n);
 
     ck_assert_int_eq(result, expected);
 }
@@ -171,10 +166,9 @@ END_TEST
 
 Suite *test_memchr(void)
 {
-    Suite *s = suite_create("memcmp_s");   // Имя набора
-    TCase *tc = tcase_create("memcmp_tc"); // Имя группы тестов
+    Suite *s = suite_create("memcmp_s");
+    TCase *tc = tcase_create("memcmp_tc");
 
-    // Добавление тестов в группу
     tcase_add_test(tc, memcmp_1);
     tcase_add_test(tc, memcmp_2);
     tcase_add_test(tc, memcmp_3);
@@ -188,7 +182,6 @@ Suite *test_memchr(void)
     tcase_add_test(tc, memcmp_11);
     tcase_add_test(tc, memcmp_12);
 
-    // Добавление группы в набор
     suite_add_tcase(s, tc);
     return s;
 }

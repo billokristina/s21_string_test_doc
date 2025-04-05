@@ -1,8 +1,7 @@
 #include <all_test.h>
-// символ есть в строке
 
 START_TEST(memchr_1)
-{ // символ в начале
+{
     const char str[] = "a0bcdefg";
     int c = 'a';
     s21_size_t n = strlen(str);
@@ -12,7 +11,7 @@ START_TEST(memchr_1)
 END_TEST
 
 START_TEST(memchr_2)
-{ // символ в середине
+{
     const char str[] = "abcd!efg";
     int c = '!';
     s21_size_t n = strlen(str);
@@ -22,7 +21,7 @@ START_TEST(memchr_2)
 END_TEST
 
 START_TEST(memchr_3)
-{ // символ в конце
+{
     const char str[] = "abc_defg";
     int c = 'g';
     s21_size_t n = strlen(str);
@@ -30,7 +29,7 @@ START_TEST(memchr_3)
     ck_assert_ptr_eq(s21_memchr(str, c, n), memchr(str, c, n));
 }
 END_TEST
-// символ отсутствует
+
 START_TEST(memchr_4)
 {
     const char str[] = "abcdefg12532";
@@ -40,7 +39,7 @@ START_TEST(memchr_4)
     ck_assert_ptr_eq(s21_memchr(str, c, n), memchr(str, c, n));
 }
 END_TEST
-// символ отсутствует
+
 START_TEST(memchr_5)
 {
     const char str[] = "abcdefg12532";
@@ -50,7 +49,7 @@ START_TEST(memchr_5)
     ck_assert_ptr_eq(s21_memchr(str, c, n), memchr(str, c, n));
 }
 END_TEST
-// n = 0
+
 START_TEST(memchr_6)
 {
     const char str[] = "abcdefg";
@@ -60,7 +59,7 @@ START_TEST(memchr_6)
     ck_assert_ptr_eq(s21_memchr(str, c, n), memchr(str, c, n));
 }
 END_TEST
-// символ за пределами n
+
 START_TEST(memchr_7)
 {
     const char str[] = "abcdefg";
@@ -70,7 +69,7 @@ START_TEST(memchr_7)
 }
 END_TEST
 
-// c = '\0'
+
 START_TEST(memchr_8)
 {
     const char str[] = "abcd\0efg";
@@ -79,7 +78,7 @@ START_TEST(memchr_8)
     ck_assert_ptr_eq(s21_memchr(str, c, n), memchr(str, c, n));
 }
 END_TEST
-// c = '\0' и отсутствует в строке
+
 START_TEST(memchr_9)
 {
     const char str[] = "abcdefg";
@@ -89,9 +88,9 @@ START_TEST(memchr_9)
 }
 END_TEST
 
-// обработка ошибок
+
 START_TEST(memchr_10)
-{ // str = ""
+{
     const char str[] = "";
     int c = '1';
     s21_size_t n = strlen(str);
@@ -100,7 +99,7 @@ START_TEST(memchr_10)
 END_TEST
 
 START_TEST(memchr_11)
-{ // невалидный указатель
+{ 
     const char str[] = s21_NULL;
     int c = '\0';
     s21_size_t n = strlen(str);
@@ -108,7 +107,7 @@ START_TEST(memchr_11)
 }
 END_TEST
 
-// нетипичные символы
+
 START_TEST(memchr_12)
 {
     const char str[] = "café";
@@ -138,10 +137,9 @@ END_TEST
 
 Suite *test_memchr(void)
 {
-    Suite *s = suite_create("memchr_s");   // Имя набора
-    TCase *tc = tcase_create("memchr_tc"); // Имя группы тестов
+    Suite *s = suite_create("memchr_s");
+    TCase *tc = tcase_create("memchr_tc");
 
-    // Добавление тестов в группу
     tcase_add_test(tc, memchr_1);
     tcase_add_test(tc, memchr_2);
     tcase_add_test(tc, memchr_3);
@@ -157,7 +155,6 @@ Suite *test_memchr(void)
     tcase_add_test(tc, memchr_13);
     tcase_add_test(tc, memchr_14);
 
-    // Добавление группы в набор
     suite_add_tcase(s, tc);
     return s;
 }
