@@ -113,7 +113,8 @@ START_TEST(memcpy_9)
 }
 END_TEST
 
-START_TEST(memcpy_10) {
+START_TEST(memcpy_10)
+{
     const char *src = "abcdef";
     char dest[3] = {0};
     size_t n = 6;
@@ -125,7 +126,8 @@ START_TEST(memcpy_10) {
 }
 END_TEST
 
-START_TEST(memcpy_11) {
+START_TEST(memcpy_11)
+{
     const char src[] = "\x01\x00\x00\x00";
     int dest = 0;
     size_t n = 4;
@@ -137,7 +139,8 @@ START_TEST(memcpy_11) {
 }
 END_TEST
 
-Suite *test_memcpy(void) {
+Suite *test_memcpy(void)
+{
     Suite *s = suite_create("memcpy_s");
     TCase *tc = tcase_create("memcpy_tc");
 
