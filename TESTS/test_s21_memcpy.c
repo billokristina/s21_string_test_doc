@@ -2,85 +2,104 @@
 
 START_TEST(memcpy_1)
 {
-    const char *src = "hello";
-    char dest[6];
-    size_t n = 6;
+    const char src[] = "hello";
+    char dest1[6] = {0};
+    char dest2[6] = {0};
+    size_t n = strlen(src) + 1;
 
-    void *result = s21_memcpy(dest, src, n);
-    ck_assert_ptr_eq(result, dest);
-    ck_assert_str_eq(dest, "hello");
+    void *res1 = s21_memcpy(dest1, src, n);
+    void *res2 = memcpy(dest2, src, n);
+
+    ck_assert_ptr_eq(res1, dest1);
+    ck_assert_ptr_eq(res2, dest2);
+    ck_assert_mem_eq(dest1, dest2, n);
 }
 END_TEST
 
 START_TEST(memcpy_2)
 {
-    const char *src = "\x01\x02\x03\x04";
-    char dest[4];
-    size_t n = 4;
+    const char src[] = "\x01\x02\x03\x04";
+    char dest1[4], dest2[4];
+    size_t n = sizeof(src) - 1;
 
-    void *result = s21_memcpy(dest, src, n);
-    ck_assert_ptr_eq(result, dest);
-    ck_assert_mem_eq(dest, src, n);
+    void *res1 = s21_memcpy(dest1, src, n);
+    void *res2 = memcpy(dest2, src, n);
+
+    ck_assert_ptr_eq(res1, dest1);
+    ck_assert_ptr_eq(res2, dest2);
+    ck_assert_mem_eq(dest1, dest2, n);
 }
 END_TEST
 
 START_TEST(memcpy_3)
 {
-    const char *src = "abc";
-    char dest[4] = {0};
+    const char src[] = "abc";
+    char dest1[4] = {0};
+    char dest2[4] = {0};
     size_t n = 0;
 
-    void *result = s21_memcpy(dest, src, n);
-    ck_assert_ptr_eq(result, dest);
-    ck_assert_mem_eq(dest, "\0\0\0\0", n);
+    void *res1 = s21_memcpy(dest1, src, n);
+    void *res2 = memcpy(dest2, src, n);
+
+    ck_assert_ptr_eq(res1, dest1);
+    ck_assert_ptr_eq(res2, dest2);
+    ck_assert_mem_eq(dest1, dest2, sizeof(dest1));
 }
 END_TEST
 
 START_TEST(memcpy_4)
 {
-    const char *src = "abcdef";
-    char dest[7] = {0};
+    const char src[] = "abcdef";
+    char dest1[7] = {0};
+    char dest2[7] = {0};
     size_t n = 3;
 
-    void *result = s21_memcpy(dest, src, n);
-    ck_assert_ptr_eq(result, dest);
-    ck_assert_mem_eq(dest, "abc\0\0\0", 7);
+    void *res1 = s21_memcpy(dest1, src, n);
+    void *res2 = memcpy(dest2, src, n);
+
+    ck_assert_ptr_eq(res1, dest1);
+    ck_assert_ptr_eq(res2, dest2);
+    ck_assert_mem_eq(dest1, dest2, sizeof(dest1));
 }
 END_TEST
 
 START_TEST(memcpy_5)
 {
-    char dest = "abcdef";
+    char data1[] = "abcdef";
+    char data2[] = "abcdef";
     size_t n = 5;
 
-    void *result = s21_memcpy(dest + 1, dest, n);
-    ck_assert_ptr_eq(result, dest + 1);
-    ck_assert_str_eq(dest, "aabcde");
+    void *res1 = s21_memcpy(data1 + 1, data1, n);
+    void *res2 = memcpy(data2 + 1, data2, n);
+
+    ck_assert_ptr_eq(res1, data1 + 1);
+    ck_assert_ptr_eq(res2, data2 + 1);
+    ck_assert_mem_eq(data1, data2, sizeof(data1));
 }
 END_TEST
 
 START_TEST(memcpy_6)
 {
-    const char *src = s21_NULL;
-    char dest[5] = {0};
+    char dest1[5] = {0};
+    char dest2[5] = {0};
     size_t n = 5;
 
-    void *result = s21_memcpy(dest, src, n);
+    void *res1 = s21_memcpy(dest1, NULL, n);
+    void *res2 = memcpy(dest2, NULL, n);
 
-    ck_assert_ptr_null(result);
+    ck_assert_ptr_eq(res1, res2);
 }
 END_TEST
 
 START_TEST(memcpy_7)
 {
-    const char *src = "abc";
-    char dest[10] = {0};
-    size_t n = 10;
+    const char src[] = "abc";
+    size_t n = 3;
 
-    void *result = s21_memcpy(dest, src, n);
+    void *res1 = s21_memcpy(NULL, src, n);
+    void *res2 = memcpy(NULL, src, n);
 
-    ck_assert_ptr_eq(result, dest);
-    ck_assert_mem_eq(dest, "abc\0", 4);
+    ck_assert_ptr_eq(res1, res2);
 }
 END_TEST
 
@@ -88,54 +107,67 @@ START_TEST(memcpy_8)
 {
     const size_t MB = 1024 * 1024;
     char *src = (char *)malloc(MB);
-    char *dest = (char *)malloc(MB);
+    char *dest1 = (char *)malloc(MB);
+    char *dest2 = (char *)malloc(MB);
     memset(src, 'a', MB);
 
-    void *result = s21_memcpy(dest, src, MB);
+    void *res1 = s21_memcpy(dest1, src, MB);
+    void *res2 = memcpy(dest2, src, MB);
 
-    ck_assert_ptr_eq(result, dest);
-    ck_assert_mem_eq(dest, src, MB);
+    ck_assert_ptr_eq(res1, dest1);
+    ck_assert_ptr_eq(res2, dest2);
+    ck_assert_mem_eq(dest1, dest2, MB);
+
     free(src);
-    free(dest);
+    free(dest1);
+    free(dest2);
 }
 END_TEST
 
 START_TEST(memcpy_9)
 {
     const char src[] = "ab\0cd";
-    char dest[6] = {0};
+    char dest1[6] = {0};
+    char dest2[6] = {0};
     size_t n = 5;
 
-    void *result = s21_memcpy(dest, src, n);
+    void *res1 = s21_memcpy(dest1, src, n);
+    void *res2 = memcpy(dest2, src, n);
 
-    ck_assert_ptr_eq(result, dest);
-    ck_assert_mem_eq(dest, src, n);
+    ck_assert_ptr_eq(res1, dest1);
+    ck_assert_ptr_eq(res2, dest2);
+    ck_assert_mem_eq(dest1, dest2, n);
 }
 END_TEST
 
 START_TEST(memcpy_10)
 {
-    const char *src = "abcdef";
-    char dest[3] = {0};
+    const char src[] = "abcdef";
+    char dest1[3] = {0};
+    char dest2[3] = {0};
     size_t n = 6;
 
-    void *result = s21_memcpy(dest, src, n);
+    void *res1 = s21_memcpy(dest1, src, n);
+    void *res2 = memcpy(dest2, src, n);
 
-    ck_assert_ptr_eq(result, dest);
-    ck_assert_mem_eq(dest, "abc", 3);
+    ck_assert_ptr_eq(res1, dest1);
+    ck_assert_ptr_eq(res2, dest2);
+    ck_assert_mem_eq(dest1, dest2, sizeof(dest1));
 }
 END_TEST
 
 START_TEST(memcpy_11)
 {
     const char src[] = "\x01\x00\x00\x00";
-    int dest = 0;
+    int dest1 = 0, dest2 = 0;
     size_t n = 4;
 
-    void *result = s21_memcpy(&dest, src, n);
+    void *res1 = s21_memcpy(&dest1, src, n);
+    void *res2 = memcpy(&dest2, src, n);
 
-    ck_assert_ptr_eq(result, &dest);
-    ck_assert_int_eq(dest, 1);
+    ck_assert_ptr_eq(res1, &dest1);
+    ck_assert_ptr_eq(res2, &dest2);
+    ck_assert_int_eq(dest1, dest2);
 }
 END_TEST
 
