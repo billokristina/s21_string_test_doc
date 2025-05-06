@@ -1,4 +1,4 @@
-#include <all_test.h>
+#include "all_test.h"
 
 START_TEST(memchr_1)
 {
