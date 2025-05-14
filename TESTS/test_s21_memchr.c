@@ -69,7 +69,6 @@ START_TEST(memchr_7)
 }
 END_TEST
 
-
 START_TEST(memchr_8)
 {
     const char str[] = "abcd\0efg";
@@ -88,7 +87,6 @@ START_TEST(memchr_9)
 }
 END_TEST
 
-
 START_TEST(memchr_10)
 {
     const char str[] = "";
@@ -99,14 +97,13 @@ START_TEST(memchr_10)
 END_TEST
 
 START_TEST(memchr_11)
-{ 
+{
     const char str[] = s21_NULL;
     int c = '\0';
     s21_size_t n = strlen(str);
     ck_assert_ptr_eq(s21_memchr(str, c, n), memchr(str, c, n));
 }
 END_TEST
-
 
 START_TEST(memchr_12)
 {
