@@ -5,3 +5,4 @@ typedef long unsigned s21_size_t;
 Suite *test_memchr(void);
 Suite *test_memcmp(void);
 Suite *test_memcpy(void);
+Suite *test_memset(void);
