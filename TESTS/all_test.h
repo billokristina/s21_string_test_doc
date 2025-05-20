@@ -6,3 +6,4 @@ Suite *test_memchr(void);
 Suite *test_memcmp(void);
 Suite *test_memcpy(void);
 Suite *test_memset(void);
+Suite *test_strncat(void);
