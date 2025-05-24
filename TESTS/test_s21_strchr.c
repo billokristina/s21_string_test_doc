@@ -72,7 +72,7 @@ START_TEST(strchr_9)
 }
 END_TEST
 
-Suite *strchr_suite(void)
+Suite *test_strchr(void)
 {
     Suite *suite = suite_create("strchr_s");
     TCase *tc_core = tcase_create("strchr_tc");
