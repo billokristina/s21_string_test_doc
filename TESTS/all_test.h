@@ -11,3 +11,4 @@ Suite *test_strchr(void);
 Suite *test_strncmp(void);
 Suite *test_strncpy(void);
 Suite *test_strcspn(void);
+Suite *test_strerror(void);
